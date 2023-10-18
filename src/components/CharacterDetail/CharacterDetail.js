@@ -14,19 +14,14 @@ export default function CharacterDetail(props) {
     console.log(params.id, params.name);
 
     return (
-        <ImageBackground source={require('../../assets/detallefondo.jpg')}>
-            <View style={styles.container}>
-                <Avatar.Image
-                    size={250}
-                    source={{ uri: params.image }}
-                    style={styles.image}
-                />
-                <View style={styles.containerfav}>
+        <ImageBackground source={require('../../assets/detallefondo.jpg')}
+        style={styles.backgroundimage}>
+        <Avatar.Image size={290}source={{ uri: params.image }} style={styles.image}/>
+            <View style={styles.containerfav}>
                 <Text style={styles.title}>{params.name}</Text>
                 <Favoritos id={params.id}/>
                 </View>
                 <TableDetail params={params}/>
-            </View>
         </ImageBackground>
     );
 }

@@ -1,7 +1,6 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { includes, pull } from "lodash";
-import {ENV} from "../utils/constants"
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { includes, inclute, pull } from 'lodash'
+import { ENV } from '../utils/constants'
 
 export const getFavoriteApi = async () => {
     try {
@@ -9,24 +8,24 @@ export const getFavoriteApi = async () => {
         return JSON.parse(response || []);
     } catch (error) {
         console.log(error);
-        return [];
     }
-};
-
+}
 
 export const addFavoriteApi = async (id) => {
+    console.log('Api',id);
     try {
-        const favorites = await getFavoriteApi();
-        return includes(favorites, id);
+        const favorites = await getFavoriteApi();;
+        favorites.push(id);
+        await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(favorites));
     } catch (error) {
         console.log(error);
-        return false;    
     }
-};
+}
 
 export const isFavoriteApi = async (id) => {
+    console.log('Api',id);
     try {
-        const favorites = await getFavoriteApi();
+        const favorites = await getFavoriteApi();;
         return includes(favorites, id);
     } catch (error) {
         console.log(error);
@@ -34,12 +33,13 @@ export const isFavoriteApi = async (id) => {
     }
 }
 
-export const removeFavoriteApi = async (id) =>{
+export const removeFavoriteApi = async (id) => {
+    console.log('Api',id);
     try {
-        const favorites = await getFavoriteApi()
-        const newFavorites = pull(favorites, id)
-        await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(newFavorites))
+        const favorites = await getFavoriteApi();;
+        const newFavorites = pull(favorites, id);
+        await AsyncStorage.setItem(ENV.STORAGE.FAVORITE, JSON.stringify(newFavorites));
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }

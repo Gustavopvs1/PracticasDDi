@@ -1,15 +1,16 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
         padding: 16,
         width: '100%',
-        marginTop: 90,
+        marginTop: 1,
+        marginVertical: 385,
     },
     head: {
         height: 40,
-        backgroundColor: '#000',
-        padding: 5
+        backgroundColor: '#CB6F27',
+        padding: 5,
     },
     headText: {
         textAlign: 'center',
@@ -19,15 +20,14 @@ export const styles = StyleSheet.create({
     },
     rowText: {
         textAlign: 'center',
-        height: 80,
-        paddingTop: 20,
+        height: 70,
+        paddingTop: 22,
         color: '#FFF',
         fontWeight: 'bold',
         fontSize: 15,
     },
     border: {
-        borderWidth: 2,
-        borderColor: '#000'
+        borderWidth: 4,
+        borderColor: '#CB6F27',
     },
-    
-})
+});

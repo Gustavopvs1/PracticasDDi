@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    backgroundImage: {
+    backgroundimage: {
         flex: 1,
         resizeMode: 'cover',
         justifyContent: 'center',
-        alignContent: 'center',
+        alignItems: 'center'
     },
     containerfav: {
         flexDirection: 'row',
@@ -16,11 +16,11 @@ export const styles = StyleSheet.create({
     image: {
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 90,
-        marginBottom: 20,
+        marginTop: 400,
+        marginBottom: 5,
     },
     title: {
-        color: '#798547',
+        color: '#CB6F27',
         fontSize: 35,
         textAlign: 'center',
         fontWeight:'bold'
