@@ -33,6 +33,9 @@ export default function Card(props) {
                             Nombre: {characters.name}
                         </Text>
                         <Text style={styles.info}>
+                            # {characters.id}
+                        </Text>
+                        <Text style={styles.info}>
                             Género: {characters.gender}
                         </Text>
                         <Text style={styles.info}>

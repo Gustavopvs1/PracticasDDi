@@ -12,6 +12,7 @@ import { styles } from './TabNavigation.styles';
 import AuthScreen from '../../../screen/Auth/AuthScreen';
 import RickandMortyApi from '../../../api/rm';
 import StackNavigation from '../StackNavigation/StackNavigation';
+import StackAccount from '../StackNavigation/StackAccount';
 
 
 const TabNavigations = () => {
@@ -22,11 +23,15 @@ const TabNavigations = () => {
       tabBarIcon: (routeStatus) => setIcon(route, routeStatus)
       })}
       >
-      <Tab.Screen
-        name="Account"
-        component={AccountScreen}
-        options={{title: 'Cuenta'}}
-      />
+            <Tab.Screen
+                name='Account'
+                component={StackAccount}
+                options={{
+                    title: '',
+                    tabBarLabel: '',
+                    headerTransparent: true
+                }}
+            />
 
         <Tab.Screen 
         name="StackNavigation" 

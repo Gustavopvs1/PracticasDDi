@@ -1,38 +1,45 @@
-import { View, Text } from "react-native";
-import React, { useCallback, useState } from "react";
-import { Button } from "react-native-paper";
-import { globalStyles } from "../../styles";
-import { getFavoriteApi } from "../api/favoritos";
-import HomeScreen from "./HomeScreen";
-import { useFocusEffect } from "@react-navigation/native";
-import axios from "axios";
-import { ENV } from "../utils/constants";
+import React, { useCallback, useEffect, useState } from 'react'
+import { getFavoriteApi } from '../api/favoritos'
+import HomeScreen from './HomeScreen'
+import axios from 'axios'
+import { ENV } from '../utils/constants'
+import { useFocusEffect } from '@react-navigation/native'
 
 export default function FavoritesScreen() {
-
-  const [personajes, setPersonaje] = useState([]);
   const [characters, setCharacters] = useState([]);
+  const [favoritos, setFavoritos] = useState([]);
+
+  const fetchCharacters = async (url) => {
+    if (characters.length > 200) {
+      return;
+    }
+    try {
+      const response = await axios.get(url);
+      const newCharacters = response.data.results;
+      setCharacters((prevCharacters) => [...prevCharacters, ...newCharacters]);
+      
+      if (response.data.info.next) {
+        fetchCharacters(response.data.info.next);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCharacters(ENV.API_URL_RM);
+  }, []);
 
   useFocusEffect(
-    useCallback
-    (() => {
-      (
-        async () => {
-          const favoriteResponse = await getFavoriteApi();
-          console.log('Lista de Favoritos',favoriteResponse);
-          setPersonaje(favoriteResponse);
-
-          try {
-            const response = await axios.get(ENV.API_URL_RM);
-            setCharacters(response.data.results);
-          } catch (error) {
-            console.log(error);
-          }
-        })();
+    useCallback(() => {
+      (async  () => {
+        const pjFavoritos = await getFavoriteApi();
+        setFavoritos(pjFavoritos);
+      })()
     }, [])
-  );
+  )  
 
   return (
-    <HomeScreen characters={characters.filter((character) => personajes.includes(character.id))} />
-  );
+    <HomeScreen characters={characters.filter((char) => favoritos.includes(char.id))} />
+  )
 }
